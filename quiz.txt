@@ -1,0 +1,43 @@
+PARTE I
+
+CREATE TABLESPACE quiz_noche
+DATAFILE 'QN' SIZE 10M, 
+'QNOCHE' SIZE 10M;
+
+CREATE PROFILE estudiante LIMIT 
+   SESSIONS_PER_USER          1
+   IDLE_TIME                  5
+   FAILED_LOGIN_ATTEMPTS      4;
+   
+CREATE USER user1
+IDENTIFIED BY user1
+DEFAULT TABLESPACE quiz_noche
+QUOTA UNLIMITED ON quiz_noche
+PROFILE estudiante;
+ 
+GRANT CONNECT TO user1;
+GRANT CREATE TABLE TO user1;
+
+CREATE USER user2
+IDENTIFIED BY user2
+DEFAULT TABLESPACE quiz_noche
+QUOTA UNLIMITED ON quiz_noche
+PROFILE estudiante;
+
+GRANT CONNECT TO user2;
+
+
+PARTE II
+
+create table attacks (
+	id INT,
+	url VARCHAR(2048),
+	ip_address VARCHAR(20),
+	number_of_attacks INT,
+	time_of_last_attack TIMESTAMP
+);
+
+
+PARTE III
+SELECT COUNT (URL) FROM ATTACKS
+WHERE number_of_attacks >=1 AND URL LIKE '%http%';
